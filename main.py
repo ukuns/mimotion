@@ -132,8 +132,8 @@ def getBeijinTime():
             max_1 = max_dict[time_list[6]]
         else:
             a = False
-            min_1 = 0
-            max_1 = 0
+            min_1 = 18000
+            max_1 = 19000
             if step1 != "":
                 min_1 = 1
                 max_1 = 1
