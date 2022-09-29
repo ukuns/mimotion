@@ -193,8 +193,8 @@ def main(_user,_passwd,min_1, max_1):
         print("已设置为随机步数(" + str(min_1) + "~" + str(max_1) + ")")
         step = str(random.randint(min_1, max_1))
     else:
-        print("已设置为随机步数(" + str(min_1) + "~" + str(max_1) + ")")
         step = str(random.randint(min_1, max_1))
+        print("已设置步数为：" + step)
     login_token = 0
     login_token, userid = login(user, password)
     if login_token == 0:
