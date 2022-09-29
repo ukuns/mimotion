@@ -94,8 +94,6 @@ def getBeijinTime():
     min_1 = 20000
     max_1 = 60000
     a = True
-    min_1 = int(K * min_1)
-    max_1 = int(K * max_1)
     if min_1 != 0 and max_1 != 0:
         user_mi = sys.argv[1]
         # 登录密码
