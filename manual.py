@@ -91,9 +91,19 @@ def getWeather():
 
 #获取北京时间确定随机步数&启动主函数
 def getBeijinTime():
+    global K, type
+    K = 1.0
+    type = ""
+    hea = {'User-Agent': 'Mozilla/5.0'}
+    url = r'http://time1909.beijing-time.org/time.asp'
+    r = requests.get(url=url, headers=hea)
+    
     min_1 = 20000
     max_1 = 60000
-    a = True
+    if step1 != "":
+        a = True
+    min_1 = int(K * min_1)
+    max_1 = int(K * max_1)
     if min_1 != 0 and max_1 != 0:
         user_mi = sys.argv[1]
         # 登录密码
@@ -101,8 +111,13 @@ def getBeijinTime():
         user_list = user_mi.split('#')
         passwd_list = passwd_mi.split('#')
         if len(user_list) == len(passwd_list):        
+            if K != 1.0:
+                msg_mi =  "由于天气" + type + "，已设置降低步数,系数为" + str(K) + "。\n" 
+            else:
+                msg_mi = ""
             for user_mi, passwd_mi in zip(user_list, passwd_list):
                 msg_mi += main(user_mi,passwd_mi,min_1, max_1)
+                #print(msg_mi)
             if a:
                push('【小米运动步数修改】', msg_mi)
                push_wx(msg_mi)
@@ -178,8 +193,8 @@ def main(_user,_passwd,min_1, max_1):
         print("已设置为随机步数(" + str(min_1) + "~" + str(max_1) + ")")
         step = str(random.randint(min_1, max_1))
     else:
+        print("已设置为随机步数(" + str(min_1) + "~" + str(max_1) + ")")
         step = str(random.randint(min_1, max_1))
-        print("已设置步数为(" + step + ")")
     login_token = 0
     login_token, userid = login(user, password)
     if login_token == 0:
